@@ -7,6 +7,8 @@
     <style>
         *{
             margin: 0%;
+            color: green;
+            font-family: 'Courier New', Courier, monospace;
         }
         nav{
             background-color: lightgray;
@@ -22,33 +24,90 @@
             display: inline;
             margin-right: 20px;
             font-size: 18px;
-            font-family: Arial, sans-serif;
+            /* font-family: Arial, sans-serif; */
         }
         main{
-            padding: 0px 20px 0px 20px;
+            /* padding: 0px 0 0px 30px; */
+            width: 100%;
+        }
+        section{
+            padding: 10px 0px 10px 0px;
+
+        }
+        #heading h1{
+            margin-top: 30px;
+            text-align: center;
+            font-size: 36px;
+            /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+        }
+        #about-me, #skills, #education, #projects, #contact{
+            font-size:x-large;
+            /* font-family: Arial, sans-serif; */
+            width: 100%;
+            height: 400px;
+            padding: 20px;
+            /* background-color: grey; */
+        }
+        #skills h2, #about-me h2, #education h2, #projects h2, #contact h2{
+            text-align: center;
+            /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+        }
+        #skills ul{
+            text-align: center;
+            list-style-type: square;
+            font-size: 18px;
+            line-height: 1.6;
+            /* font-family: Arial, sans-serif; */
+        }
+        #skills li{
+            display: inline;
+            padding: 0px 15px 0px 15px;
+        }
+        #education table{
+            width: 50%;
+            /* border-collapse: collapse; */
+            /* font-family: Arial, sans-serif; */
+            font-size: 18px;
+            text-align: center;
+            margin: 0 25% 0 25%;
+        }
+        #projects ol{
+            /* font-family: Arial, sans-serif; */
+            font-size: 18px;
+            padding: 0px 20%;
+        }
+        #contact form{
+            text-align: center;
+            /* font-family: Arial, sans-serif; */
+            font-size: 18px;
+        }
+        input, textarea{
+            font-size: 16px;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: gray;
         }
     </style>
 </head>
-<body style="background-color: antiquewhite;">
+<body style="background-color: black;">
 <header>
-    <nav>
+    <!-- <nav>
         <li>Home</li>
         <li>Skills</li>
         <li>Projects</li>
         <li>Contact</li>
-    </nav>
+    </nav> -->
     <main>
-        <section>
+        <section id="heading">
             <h1>Welcome to My Portfolio</h1>
-            <br>
-        </section>
-        <section>
+             
+        </section> <hr>
+        <section id="about-me">
             <h2>About Me</h2>
             <p>I am Yash, a 3rd Year B.Tech IT student. I come from Prayagraj and I am enthusiastic about building systems and securing them.
-                 <br>I am primarily into cybsersecurity and devops and I am currently exploring other technologies as well.</p>
-        </section><br>
-        <section>
-            <h2>Skills</h2>
+                  I am primarily into cybsersecurity and devops and I am currently exploring other technologies as well.</p>
+        </section><hr> 
+        <section id="skills">
+            <h2>Skills</h2> 
             <ul>
                 <li>HTML</li>
                 <li>CSS</li>
@@ -59,8 +118,9 @@
                 <li>C</li>
                 <li>C++</li>
             </ul>
-        </section><br>
-        <section><h2>Education</h2>
+        </section> <hr> 
+        <section id="education">
+            <h2>Education</h2>
         <table border="1">
             <tr>
                 <th>Degree</th>
@@ -83,22 +143,22 @@
                 <td>2020- 2021</td>
             </tr>
         </table>
-        </section><br>
-        <section>
-            <h2>Projects</h2><br>
+        </section> <hr> 
+        <section id ="projects">
+            <h2>Projects</h2> 
             <ol>
                 <li>
                     <article>
                         <h3>Project 1: Personal Website</h3>
                         <p>Developed a personal portfolio website using HTML, CSS, and JavaScript to showcase my skills and projects.</p>
                     </article>
-                </li><br>
+                </li> 
                 <li>
                     <article>
                         <h3>Project 2: To-Do List App</h3>
                         <p>Created a to-do list application using Python and Flask that allows users to manage their tasks efficiently.</p>
                     </article>
-                </li><br>
+                </li> 
                 <li>
                     <article>
                         <h3>Project 3: Cybersecurity Blog</h3>
@@ -106,10 +166,18 @@
                     </article>
                 </li>
             </ol>
-        </section>
-        <section>
-            <h2>Contact Me</h2>
-            <p>Email:
+        </section> <hr> 
+        <section id="contact">
+            <h2>Contact Me</h2>  
+            <form action="">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>  <br><br>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>  <br><br>
+                <label for="message">Message</label>  <br><br>
+                <textarea id="message" name="message" rows="4" cols="50" required></textarea>  <br><br>
+                <input type="submit" value="Submit">
+            </form>
         </section>
     </main>
 </header>
