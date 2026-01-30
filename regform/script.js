@@ -46,27 +46,64 @@
 // console.log(calculator(10,0,divide));      // Output: Error: Division by zero
 
 
-function greet1(){
-    console.log("Hello");    
+// function greet1(){
+//     console.log("Hello");    
+// }
+
+// const greet2 = function (){
+//     console.log("Hello Wolrd");
+// }
+// function callMe(fn){
+//     fn();
+// }
+
+
+// callMe(greet1);
+// callMe(greet2);
+
+
+// callMe(function(){
+//     console.log("Hello World")
+// })
+
+
+// const greet3 = (name) => console.log(`Hello ${name}`);
+
+// greet3("yash")
+
+
+const arr = [1,2,4,5,6,3,25,4];
+// console.log(arr)
+//TASk1
+function sumArr(arr){
+    let s=0;
+    // for (let i=0;i<arr.length;i++){1
+    //     s+=arr[i]
+    // }
+    for (let n of arr){
+        s+=n;
+    }
+    console.log("Sum of array: "+ s)
+}
+//Task2
+function revArr(arr){
+    let newArr=[]
+    for (let i=arr.length;i>0;i--){
+        newArr.push(arr[i-1]);
+    }
+    console.log(newArr)
+}
+//Task3
+str = "hello world"
+function revStr(str){
+    let newstr=''
+    for (let i=str.length;i>0;i--){
+        newstr+=str[i-1]
+    }
+    console.log(newstr)
 }
 
-const greet2 = function (){
-    console.log("Hello Wolrd");
-}
-function callMe(fn){
-    fn();
-}
 
-
-callMe(greet1);
-callMe(greet2);
-
-
-callMe(function(){
-    console.log("Hello World")
-})
-
-
-const greet3 = (name) => console.log(`Hello ${name}`);
-
-greet3("yash")
+sumArr(arr)
+revArr(arr)
+revStr(str)
