@@ -12,5 +12,16 @@ const person2 = {
     greet: sayName
 };
 
+const user = {
+    name: "Spike",
+    sayName (){
+        setTimeout(()=>{
+        console.log(`My name is ${this.name}`);
+    }, 1000);
+    }
+};
+
 person1.greet(); 
 person2.greet();
+
+user.sayName();
