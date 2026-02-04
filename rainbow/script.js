@@ -66,5 +66,5 @@ changeColorPromise('red',1000)
 .then(()=>changeColorPromise('green'),1000)
 .then(()=>changeColorPromise('blue'),1000)
 .then(()=>changeColorPromise('indigo'),1000)
-.then(()=>changeColorPromise('violet'),1000)Z
+.then(()=>changeColorPromise('violet'),1000)
 .then(()=>console.log("All colors are displayed"));
