@@ -1,0 +1,20 @@
+*{
+    margin:0;
+    background-color: #121212;
+}
+nav{
+    background-color: #1E1E1E;
+    color: white;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.ov{
+    color: white;
+    margin: 5%;
+}
+ovCon{
+    display: flex;
+    
+}

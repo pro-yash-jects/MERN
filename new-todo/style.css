@@ -1,0 +1,55 @@
+*{
+    background-color: black;
+}
+header{
+    background-color: grey;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+}
+header h1{
+    color: white;
+    background-color: grey;
+}
+/* h2{
+    color: white;
+    background-color: grey;
+    margin: 5% 5% 0 5%;
+} */
+.pending, .completed{
+    background-color: grey;
+    color: black;
+    margin: 10px;
+    /* padding: 10px; */
+    border-radius: 5px;
+    width: 80%;
+    display: flex;
+    margin: 5% auto ;
+    justify-content: center;
+    align-items: center;
+
+}
+.pending ul li{
+    background-color: green;
+    
+}
+
+.pending ul, .completed ul{
+    /* padding: 2%; */
+    display: grid;
+    /* flex-direction: column; */
+    /* gap: 10px; */
+    grid-template-columns: repeat(1, minmax(200px, 1fr));
+    grid-gap: 15px;
+    background-color: grey;
+    width: 90%;
+    padding: 0%;
+    margin:0;
+}
+.pending li , .completed li{
+    list-style: none;
+    color: white;
+    border-radius: 5px;
+    padding: 2%;
+    font-size: larger;
+}
