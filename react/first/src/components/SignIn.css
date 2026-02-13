@@ -1,0 +1,23 @@
+*{
+    width: 100%;
+}
+.sign{
+    width: 40%;
+    margin: auto;
+}
+form {
+    display: grid;
+    grid-template-columns: (0.5fr 0.5fr);
+    gap: 12px;
+    align-items: space-between;
+    justify-content: space-between;
+    font-size: larger
+    
+}
+form input {
+    width: 40%;
+    height: 20px; 
+    border-radius: 5px;
+    border: 1px solid gray;
+    padding: 5px;
+}
