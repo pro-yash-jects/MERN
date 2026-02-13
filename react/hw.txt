@@ -1,0 +1,14 @@
+> take new react app
+> make changes in src
+	> components(jsx+css)
+		-> SignIn 
+		-> SignUp
+		-> About
+		-> Home
+	> pages:
+		-> SignIn
+		-> SignUp
+		-> About
+		-> Home
+	> context:
+		->ThemeContext

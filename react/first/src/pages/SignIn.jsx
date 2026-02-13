@@ -1,4 +1,4 @@
-import SignInComponent from "../components/SignInComponent"
+import SignInComponent from "../components/Sign/SignInComponent"
 function SignIn() {
     return <>
     <SignInComponent />
