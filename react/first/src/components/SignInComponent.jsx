@@ -1,12 +1,12 @@
 import "./SignIn.css";
-function SignIn() {
+function SignInComponent() {
   return (
     <>
       <div className="sign">
       <h1>Sign UP </h1>
       <form>
         <label htmlFor="uname">
-        <p>Username: </p>
+        Username:
           <input type="text" placeholder="Username" required id="uname" />
         </label>
         <br />
@@ -35,4 +35,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default SignInComponent;
