@@ -3,19 +3,26 @@ const PORT = 3000;
 
 const app = express();
 app.use(express.json());
-let users = [];
 
-app.post('/users', (req, res) => {
+const connectDB = require ('./db');
+const User = require('./models/User');
+connectDB();
+// let users = [];
+
+app.post('/users', async (req, res) => {
   const {firstName, lastName, email, password, dob} = req.body;
   if (!firstName || !lastName || !email || !password || !dob) {
     res.status(400).send('All fields are required');
     console.log('All fields are required');
     return;
   }
-  const existingUser = users.find(user => user.email === email);
+
+  // const existingUser = users.find(user => user.email === email);
+
+  const existingUser = await User.findOne({email});
   if (existingUser) {
     res.status(409).send('User with this email already exists');
-    console.log('User with this email already exists');
+    console.log(existingUser);
     return;
   }
   const newUser = {
@@ -26,25 +33,35 @@ app.post('/users', (req, res) => {
     password,
     dob
   }
-  users.push(newUser);
+  // users.push(newUser);
+  const user = await User.create(newUser)
   res.status(201).json({message: 'User created successfully',newUser});  
   }
 );
 
-app.get('/users', (req, res) => {
-  res.json({"message":"List of users:",users});
+app.get('/users', async (req, res) => {
+  // res.json({"message":"List of users:",users});
+  const users = await User.find();
+  res.json(users)
   return;
 });
 
-app.get('/users/:id', (req, res) => {
+app.get('/users/:id', async (req, res) => {
   const userId = parseInt(req.params.id);
-  const user = users.find(u => u.userId === userId);
-  if (!user) {
-    res.status(404).send('User not found');
-    console.log('User not found');
+  // const user = users.find(u => u.userId === userId);
+  // if (!user) {
+  //   res.status(404).send('User not found');
+  //   console.log('User not found');
+  //   return;
+  // }
+  // res.json(user);
+  const user = await User.findOne({userId})
+  if (!user){
+    res.send("User not found")
     return;
   }
-  res.json(user);
+  console.log("Object fetched:",user)
+  res.json(user)
   return;
 });
 
