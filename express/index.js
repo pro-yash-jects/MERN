@@ -27,30 +27,73 @@ app.post('/users', (req, res) => {
     dob
   }
   users.push(newUser);
-  res.status(201).json(newUser);  
+  res.status(201).json({message: 'User created successfully',newUser});  
   }
 );
 
 app.get('/users', (req, res) => {
-  res.json(users);
+  res.json({"message":"List of users:",users});
   return;
 });
+
+app.get('/users/:id', (req, res) => {
+  const userId = parseInt(req.params.id);
+  const user = users.find(u => u.userID === userId);
+  if (!user) {
+    res.status(404).send('User not found');
+    console.log('User not found');
+    return;
+  }
+  res.json(user);
+  return;
+});
+
+// app.put('/users/:id', (req, res) => {
+//   const userId = parseInt(req.params.id);
+//   const {firstName, lastName, email, password, dob} = req.body;
+//   const userIndex = users.findIndex(u => u.userID === userId);
+//   if (userIndex === -1) {
+//     res.status(404).send('User not found');
+//     console.log('User not found');
+//     return;
+//   }
+//   const updatedUser = {
+//     userID: userId,
+//     firstName: firstName || users[userIndex].firstName,
+//     lastName: lastName || users[userIndex].lastName,
+//     email: email || users[userIndex].email,
+//     password: password || users[userIndex].password,
+//     dob: dob || users[userIndex].dob
+//   };
+//   users[userIndex] = updatedUser;
+//   res.json({message: 'User updated successfully', updatedUser});
+//   return;
+// });
+
+
+app.put('/users/:id',  (req,res)=>{
+  const id = parseInt(req.params.id);
+  const {firstName, lastName, email, password, dob} = req.body;
+  let user = users.find(u => u.userId == id);
+  const Newuser = {
+    "userID" : id,
+    "firstName": firstName || user.firstName,
+    "lastName" : lastName || user.lastName,
+    "email": email || user.email,
+    "password": password || user.password,
+    "dob": dob || user.dob
+  }
+  const index = users.findIndex(u => u.userId == id);
+  users[index]=Newuser;
+  console.log(users)
+  res.send(users[index])
+  return;
+})
 
 
 app.get('/', (req, res) => {
   res.send('Response from the server');
   return;
-});
-
-app.get('/about', (req, res) => {
-  const user = {
-    name: 'John Doe',
-    age: 30,
-    email: 'abc@gmail.com'
-  }
-  res.json(user);
-  return;
-  
 });
 
 app.get('/search', (req, res) => {
@@ -61,30 +104,7 @@ app.get('/search', (req, res) => {
   return;
 });
 
-app.get('/user/:id', (req, res) => {
-  const userId = req.params.id;
-  console.log(userId);
-  res.send(`User ID: ${userId}`);
-  return;
-});
 
-app.post('/test', (req, res) => {
-  const data = req.body;
-  console.log(data);
-  res.send('Data received successfully');
-  return;
-});
-
-app.post('/greet', (req, res) => {
-  const {name,age} = req.body;
-  if (!name || !age) {
-    res.status(400).send('Name and age are required');
-    console.log('Name and age are required');
-    return;
-  }
-  res.send(`Welcome ${name}!, Your age is ${age}`);
-  return; 
-});
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
