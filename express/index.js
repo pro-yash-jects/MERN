@@ -19,7 +19,7 @@ app.post('/users', (req, res) => {
     return;
   }
   const newUser = {
-    userID : Date.now(),
+    userId : Date.now(),
     firstName,
     lastName,
     email,
@@ -38,7 +38,7 @@ app.get('/users', (req, res) => {
 
 app.get('/users/:id', (req, res) => {
   const userId = parseInt(req.params.id);
-  const user = users.find(u => u.userID === userId);
+  const user = users.find(u => u.userId === userId);
   if (!user) {
     res.status(404).send('User not found');
     console.log('User not found');
@@ -48,35 +48,12 @@ app.get('/users/:id', (req, res) => {
   return;
 });
 
-// app.put('/users/:id', (req, res) => {
-//   const userId = parseInt(req.params.id);
-//   const {firstName, lastName, email, password, dob} = req.body;
-//   const userIndex = users.findIndex(u => u.userID === userId);
-//   if (userIndex === -1) {
-//     res.status(404).send('User not found');
-//     console.log('User not found');
-//     return;
-//   }
-//   const updatedUser = {
-//     userID: userId,
-//     firstName: firstName || users[userIndex].firstName,
-//     lastName: lastName || users[userIndex].lastName,
-//     email: email || users[userIndex].email,
-//     password: password || users[userIndex].password,
-//     dob: dob || users[userIndex].dob
-//   };
-//   users[userIndex] = updatedUser;
-//   res.json({message: 'User updated successfully', updatedUser});
-//   return;
-// });
-
-
 app.put('/users/:id',  (req,res)=>{
   const id = parseInt(req.params.id);
   const {firstName, lastName, email, password, dob} = req.body;
   let user = users.find(u => u.userId == id);
   const Newuser = {
-    "userID" : id,
+    "userId" : id,
     "firstName": firstName || user.firstName,
     "lastName" : lastName || user.lastName,
     "email": email || user.email,
