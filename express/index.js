@@ -1,53 +1,57 @@
-const express = require('express');
+//Imports
+const express = require("express");
+const connectDB = require("./db");
+const User = require("./models/User");
+//Config
 const PORT = 3000;
 
+//Methods
 const app = express();
 app.use(express.json());
-
-const connectDB = require ('./db');
-const User = require('./models/User');
 connectDB();
+
+//Initialising global variables
 // let users = [];
 
-app.post('/users', async (req, res) => {
-  const {firstName, lastName, email, password, dob} = req.body;
+//Routes
+app.post("/users", async (req, res) => {
+  const { firstName, lastName, email, password, dob } = req.body;
   if (!firstName || !lastName || !email || !password || !dob) {
-    res.status(400).send('All fields are required');
-    console.log('All fields are required');
+    res.status(400).send("All fields are required");
+    console.log("All fields are required");
     return;
   }
 
   // const existingUser = users.find(user => user.email === email);
 
-  const existingUser = await User.findOne({email});
+  const existingUser = await User.findOne({ email });
   if (existingUser) {
-    res.status(409).send('User with this email already exists');
+    res.status(409).send("User with this email already exists");
     console.log(existingUser);
     return;
   }
   const newUser = {
-    userId : Date.now(),
+    // userId : Date.now(),
     firstName,
     lastName,
     email,
     password,
-    dob
-  }
+    dob,
+  };
   // users.push(newUser);
-  const user = await User.create(newUser)
-  res.status(201).json({message: 'User created successfully',newUser});  
-  }
-);
+  const user = await User.create(newUser);
+  res.status(201).json({ message: "User created successfully", newUser });
+});
 
-app.get('/users', async (req, res) => {
+app.get("/users", async (req, res) => {
   // res.json({"message":"List of users:",users});
   const users = await User.find();
-  res.json(users)
+  res.json(users);
   return;
 });
 
-app.get('/users/:id', async (req, res) => {
-  const userId = parseInt(req.params.id);
+app.get("/users/:id", async (req, res) => {
+  const userId = req.params.id;
   // const user = users.find(u => u.userId === userId);
   // if (!user) {
   //   res.status(404).send('User not found');
@@ -55,50 +59,59 @@ app.get('/users/:id', async (req, res) => {
   //   return;
   // }
   // res.json(user);
-  const user = await User.findOne({userId})
-  if (!user){
-    res.send("User not found")
+  const user = await User.findById(userId);
+  if (!user) {
+    res.send("User not found");
     return;
   }
-  console.log("Object fetched:",user)
-  res.json(user)
+  console.log("Object fetched:", user);
+  res.json(user);
   return;
 });
 
-app.put('/users/:id',  (req,res)=>{
-  const id = parseInt(req.params.id);
-  const {firstName, lastName, email, password, dob} = req.body;
-  let user = users.find(u => u.userId == id);
-  const Newuser = {
-    "userId" : id,
-    "firstName": firstName || user.firstName,
-    "lastName" : lastName || user.lastName,
-    "email": email || user.email,
-    "password": password || user.password,
-    "dob": dob || user.dob
+app.put("/users/:id", async (req, res) => {
+  const id = req.params.id;
+  const { firstName, lastName, email, password, dob } = req.body;
+  // let user = users.find(u => u.userId == id);
+  const user = await User.findByIdAndUpdate(id, req.body, { new: true });
+  res.status(201).json(user);
+  // const Newuser = {
+  //   "userId" : id,
+  //   "firstName": firstName || user.firstName,
+  //   "lastName" : lastName || user.lastName,
+  //   "email": email || user.email,
+  //   "password": password || user.password,
+  //   "dob": dob || user.dob
+  // }
+  // const index = users.findIndex(u => u.userId == id);
+  // users[index]=Newuser;
+  // res.send(users[index])
+
+  return;
+});
+
+app.delete("/users/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    await User.findByIdAndDelete(id);
+    res.send("User deleted successfully.");
+  } catch (err) {
+    res.status(400).send("User not found.");
   }
-  const index = users.findIndex(u => u.userId == id);
-  users[index]=Newuser;
-  console.log(users)
-  res.send(users[index])
-  return;
-})
+});
 
-
-app.get('/', (req, res) => {
-  res.send('Response from the server');
+app.get("/", (req, res) => {
+  res.send("Response from the server");
   return;
 });
 
-app.get('/search', (req, res) => {
-  // const query = req.query.q;
-  // res.send(`You searched for: ${query}`);
-  console.log(req.query);
-  res.json(req.query)
-  return;
-});
-
-
+// app.get('/search', (req, res) => {
+//   // const query = req.query.q;
+//   // res.send(`You searched for: ${query}`);
+//   console.log(req.query);
+//   res.json(req.query)
+//   return;
+// });
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
