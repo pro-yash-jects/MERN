@@ -72,6 +72,31 @@ app.get("/users/:id", async (req, res) => {
 app.put("/users/:id", async (req, res) => {
   const id = req.params.id;
   const { firstName, lastName, email, password, dob } = req.body;
+  if (!firstName || !lastName || !email || !password || !dob) {
+    res.status(400).send("All fields are required");
+    console.log("All fields are required");
+    return;
+  }
+  // let user = users.find(u => u.userId == id);
+  const user = await User.findByIdAndUpdate(id, req.body, { new: true });
+  res.status(201).json(user);
+  // const Newuser = {
+  //   "userId" : id,
+  //   "firstName": firstName || user.firstName,
+  //   "lastName" : lastName || user.lastName,
+  //   "email": email || user.email,
+  //   "password": password || user.password,
+  //   "dob": dob || user.dob
+  // }
+  // const index = users.findIndex(u => u.userId == id);
+  // users[index]=Newuser;
+  // res.send(users[index])
+
+  return;
+});
+app.patch("/users/:id", async (req, res) => {
+  const id = req.params.id;
+  const { firstName, lastName, email, password, dob } = req.body;
   // let user = users.find(u => u.userId == id);
   const user = await User.findByIdAndUpdate(id, req.body, { new: true });
   res.status(201).json(user);
